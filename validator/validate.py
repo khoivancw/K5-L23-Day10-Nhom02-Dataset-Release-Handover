@@ -4,9 +4,13 @@ import csv
 import hashlib
 import json
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from itertools import combinations
 from pathlib import Path
+
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+from pngutil import read_rgb
 
 
 def inside(root, name):
@@ -77,6 +81,33 @@ def metadata_errors(root):
             errors.append({"type": "guideline_mismatch", "target": row["image"]})
     errors.extend({"type": "scene_leak", "target": scene}
                   for scene, values in splits.items() if len(values) > 1)
+    return errors
+
+
+
+def panoptic_errors(root, manifest):
+    pan = read_json(inside(root, "panoptic.json"))
+    images = {i["id"]: i for i in pan["images"]}
+    categories = {c["id"]: c for c in pan["categories"]}
+    annotations = {a["file_name"]: a for a in pan["annotations"]}
+    errors = []
+    for target, item in manifest.items():
+        ann = annotations[Path(item["mask"]).name]
+        im = images[ann["image_id"]]
+        issues = set()
+        _, _, rgb = read_rgb(inside(root, item["mask"]))
+        pixels = iter(rgb)
+        counts = Counter(zip(pixels, pixels, pixels))
+        for segment in ann["segments_info"]:
+            category = categories.get(segment["category_id"])
+            if category is None:
+                issues.add("invalid_category_id")
+            elif category["isthing"] and segment["id"] and not segment.get("iscrowd"):
+                key = segment["id"]
+                actual_area = counts[(key & 255, key >> 8 & 255, key >> 16 & 255)]
+                if actual_area < segment["area"]:
+                    issues.add("thing_overlap")
+        errors.extend({"type": issue, "target": target} for issue in sorted(issues))
     return errors
 
 
