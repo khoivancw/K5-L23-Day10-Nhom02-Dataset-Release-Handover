@@ -46,13 +46,41 @@ def render(root, item, candidate, overlays):
     return frame
 
 
+def save_review(path, target, kind, verdict, reviewer, note):
+    if not reviewer.strip() or len(note.strip()) < 20 or kind not in TYPES or verdict not in ("confirmed", "rejected"):
+        raise ValueError("Điền tên, loại lỗi, kết luận và mô tả ít nhất 20 ký tự về điều m thấy.")
+    rows = []
+    if path.exists():
+        with path.open(encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames != FIELDS:
+                raise ValueError("CSV đang có cấu trúc khác mẫu.")
+            rows = list(reader)
+    rows = [r for r in rows if r["image"] != target]
+    rows.append(dict(image=target, type=kind, verdict=verdict, note=f"{reviewer.strip()}: {note.strip()}"))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    import tempfile
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="", dir=path.parent, delete=False) as f:
+        tmp = Path(f.name)
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+    try:
+        os.replace(tmp, path)
+    finally:
+        tmp.unlink(missing_ok=True)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("delivery", type=Path)
     p.add_argument("--candidates", required=True, type=Path)
+    p.add_argument("--log", required=True, type=Path)
     p.add_argument("--rules", type=Path, help="File lỗi luật, mặc định dùng rules.json cạnh candidates.json nếu có")
     args = p.parse_args()
     root = args.delivery.resolve()
+    if args.log.resolve().is_relative_to(root) or args.log.resolve() == args.candidates.resolve():
+        p.error("Chọn file CSV riêng bên ngoài delivery.")
     manifest = read_json(inside(root, "manifest.json"))["items"]
     queue = read_json(args.candidates)["candidates"]
     candidates = {c["target"]: c for c in queue}
@@ -78,6 +106,18 @@ def main():
     zoom = tk.DoubleVar(value=1)
     bar = ttk.Frame(win)
     bar.pack()
+    fields = ttk.Frame(win)
+    fields.pack()
+    name, kind, verdict, note = [tk.StringVar() for _ in range(4)]
+    for title, widget in [
+        ("Người xem", ttk.Entry(fields, textvariable=name, width=18)),
+        ("Loại lỗi", ttk.Combobox(fields, textvariable=kind, values=TYPES, state="readonly", width=16)),
+        ("Kết luận", ttk.Combobox(fields, textvariable=verdict, values=("confirmed", "rejected"), state="readonly", width=12)),
+        ("Thấy gì trong ảnh?", ttk.Entry(fields, textvariable=note, width=48))]:
+        col = fields.grid_size()[0]
+        ttk.Label(fields, text=title).grid(row=0, column=col)
+        widget.grid(row=1, column=col, padx=3)
+
     def refresh():
         target = targets[index]
         candidate = candidates.get(target)
@@ -110,6 +150,9 @@ def main():
     def move(step):
         nonlocal index
         index = min(len(targets)-1, max(0,index+step))
+        kind.set("")
+        verdict.set("")
+        note.set("")
         refresh()
 
     def change_filter():
@@ -119,6 +162,17 @@ def main():
         index = targets.index(previous) if previous in targets else 0
         move(0)
 
+    def record():
+        try:
+            save_review(args.log, targets[index], kind.get(), verdict.get(), name.get(), note.get())
+        except (OSError, ValueError) as exc:
+            messagebox.showerror("Chưa lưu", str(exc))
+            return
+        if index+1 < len(targets):
+            move(1)
+        else:
+            messagebox.showinfo("Đã lưu", str(args.log))
+
     ttk.Button(bar, text="Ảnh trước", command=lambda: move(-1)).pack(side="left")
     ttk.Button(bar, text="Ảnh sau", command=lambda: move(1)).pack(side="left")
     ttk.Checkbutton(bar, text="Khung cam / viền mask xanh", variable=overlays, command=refresh).pack(side="left")
@@ -126,6 +180,7 @@ def main():
     flagged = tk.BooleanVar(value=False)
     ttk.Checkbutton(bar, text="Chỉ ảnh có cảnh báo", variable=flagged, command=change_filter,
                     state="normal" if warnings else "disabled").pack(side="left")
+    ttk.Button(win, text="Lưu nhận xét", command=record).pack()
     refresh()
     win.mainloop()
 

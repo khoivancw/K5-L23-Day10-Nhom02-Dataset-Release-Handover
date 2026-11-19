@@ -1,12 +1,36 @@
 {
-  "errors": [
-    {
-      "type": "wrong_hash",
-      "target": "000000013659"
-    },
-    {
-      "type": "wrong_hash",
-      "target": "000000021167"
-    }
-  ]
+ "errors": [
+  {
+   "type": "category_swap",
+   "target": "000000017379"
+  },
+  {
+   "type": "class_swap",
+   "target": "000000013177"
+  },
+  {
+   "type": "class_swap",
+   "target": "000000018491"
+  },
+  {
+   "type": "class_swap",
+   "target": "000000025386"
+  },
+  {
+   "type": "missing_box",
+   "target": "000000001818"
+  },
+  {
+   "type": "missing_box",
+   "target": "000000012748"
+  },
+  {
+   "type": "wrong_hash",
+   "target": "000000013659"
+  },
+  {
+   "type": "wrong_hash",
+   "target": "000000021167"
+  }
+ ]
 }
