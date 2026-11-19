@@ -1,4 +1,4 @@
-"""Hai luật kiểm file và hàng đợi gợi ý bất đồng lớp. Chỉ dùng thư viện chuẩn."""
+"""Validate delivery files, detection labels, panoptic segments and release metadata."""
 import argparse
 import csv
 import hashlib
@@ -69,7 +69,6 @@ def label_errors(path, classes, width, height):
     return issues
 
 
-
 def metadata_errors(root):
     with inside(root, "jobs.csv").open(encoding="utf-8-sig", newline="") as stream:
         guidelines = {row["job_id"]: row["guideline"] for row in csv.DictReader(stream)}
@@ -84,17 +83,18 @@ def metadata_errors(root):
     return errors
 
 
-
-def panoptic_errors(root, manifest):
+def validate_rules(root, manifest):
     pan = read_json(inside(root, "panoptic.json"))
     images = {i["id"]: i for i in pan["images"]}
     categories = {c["id"]: c for c in pan["categories"]}
     annotations = {a["file_name"]: a for a in pan["annotations"]}
-    errors = []
+    classes = {line.split()[0] for line in inside(root, "classes.txt").read_text().splitlines() if line.strip()}
+    errors = metadata_errors(root)
     for target, item in manifest.items():
+        errors.extend(file_errors(root, target, item))
         ann = annotations[Path(item["mask"]).name]
         im = images[ann["image_id"]]
-        issues = set()
+        issues = label_errors(inside(root, item["label"]), classes, im["width"], im["height"])
         _, _, rgb = read_rgb(inside(root, item["mask"]))
         pixels = iter(rgb)
         counts = Counter(zip(pixels, pixels, pixels))
@@ -109,7 +109,6 @@ def panoptic_errors(root, manifest):
                     issues.add("thing_overlap")
         errors.extend({"type": issue, "target": target} for issue in sorted(issues))
     return errors
-
 
 
 def mask_samples(width, height, rgb, segment_ids):
@@ -159,8 +158,6 @@ def region_hint(segment, name, points, detections):
 
 
 def suggest(root, manifest):
-    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-    from pngutil import read_rgb
     pan = read_json(inside(root, "panoptic.json"))
     images = {i["id"]: i for i in pan["images"]}
     categories = {c["id"]: c for c in pan["categories"]}
@@ -223,12 +220,10 @@ def main():
     if len(set(outputs)) != len(outputs) or any(p.is_relative_to(root) for p in outputs):
         parser.error("Use distinct output files outside delivery")
     manifest = read_json(inside(root, "manifest.json"))["items"]
-    errors = []
-    for target, item in manifest.items():
-        errors.extend(file_errors(root, target, item))
+    errors = validate_rules(root, manifest)
     queue = suggest(root, manifest) if args.candidates else []
     write_json(args.out, {"errors": errors})
-    print(f"{len(manifest)} images; {len(errors)} missing_image/wrong_hash")
+    print(f"{len(manifest)} images; {len(errors)} rule findings")
     if args.candidates:
         write_json(args.candidates, {"candidates": queue})
         print(f"{len(queue)} images for visual review")
