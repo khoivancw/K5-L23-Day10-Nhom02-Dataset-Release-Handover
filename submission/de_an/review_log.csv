@@ -1,0 +1,14 @@
+image,type,verdict,note
+img_0022,instance_merge,confirmed,"Khởi: “Xe đỏ và xe xám là hai xe riêng, nhưng cùng một vùng mask phủ lên phần thân của cả hai."
+img_0043,instance_merge,rejected,Khởi: Viền xanh bám theo một thanh cà rốt nằm chéo qua hai khung cam. Các thanh cà rốt bên cạnh nằm ngoài viền
+img_0057,category_swap,confirmed,"Khởi: Viền xanh ôm thân và bánh chiếc ô tô con màu bạc phía trước xe buýt. Box ghi car, nhưng mask lại ghi truck"
+img_0082,instance_merge,rejected,Khởi: Viền xanh bao phần tán ô xám lộ ra giữa hai khung cam. Tán ô đen và tán ô chấm trắng vẫn nằm ngoài viền.
+img_0083,instance_merge,rejected,Khởi: Viền xanh chỉ bao phần ngựa lộ ra ở chỗ hai khung gặp nhau. Thân và chân con ngựa phía dưới nằm ngoài mask.
+img_0084,class_swap,confirmed,"Khởi: Chiếc nĩa nằm chéo trên con dao. Khung cam bao con dao nhưng ghi fork, còn viền mask bám đúng lưỡi và cán dao"
+img_0095,category_swap,confirmed,Khởi: Xe có thùng ben phía sau và hai trục bánh sau. Viền xanh bám theo thùng và bánh xe tải nhưng mask lại mang nhãn car
+img_0148,instance_merge,rejected,"Khởi: Viền xanh bám đầu, cổ và phần chân lộ ra của con hươu đứng sau; thân nó bị con phía trước che khuất"
+img_0157,class_swap,confirmed,"Khởi: Khung cam bao chiếc ô tô con phía sau hai người đang ngồi. Mask ghi car, còn box ghi truck."
+img_0162,instance_merge,confirmed,Khởi: Có hai đầu đồng hồ cạnh nhau nhưng cùng nằm trong một vùng mask
+img_0193,instance_merge,confirmed,"Khởi: Hai con ngựa đứng tách nhau, có khoảng mặt đường giữa chúng. Mỗi con có một box riêng nhưng mask đang xét bao cả hai con."
+img_0219,class_swap,confirmed,"Khởi: Ở góc dưới bên trái khay có một chiếc thìa đặt chéo. Viền xanh bám theo thìa và mask ghi spoon, nhưng box lại ghi microwave"
+img_0247,category_swap,confirmed,"Khởi: Khung cam bao chiếc bánh mì kẹp thịt ở đĩa phía sau. Box ghi đúng sandwich, nhưng mask của chiếc bánh lại ghi stop sign"

@@ -1,0 +1,326 @@
+{
+  "candidates": [
+    {
+      "target": "img_0022",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          385.20032000000003,
+          331.9700825,
+          79.32992,
+          57.29016300000001
+        ],
+        [
+          464.31967999999995,
+          328.1902785,
+          60.350080000000005,
+          47.669853
+        ]
+      ],
+      "box": [
+        385.20032000000003,
+        328.1902785,
+        139.46943999999996,
+        61.06996700000002
+      ],
+      "detection": "car",
+      "panoptic": "car",
+      "segment_id": 12601872
+    },
+    {
+      "target": "img_0043",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          266.89984,
+          367.34976,
+          65.98016,
+          41.59008
+        ],
+        [
+          306.98016,
+          388.92024,
+          67.23008,
+          60.03984
+        ]
+      ],
+      "box": [
+        266.89984,
+        367.34976,
+        107.31040000000002,
+        81.61031999999994
+      ],
+      "detection": "carrot",
+      "panoptic": "carrot",
+      "segment_id": 1912597
+    },
+    {
+      "target": "img_0057",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          402.33024,
+          213.27989,
+          234.76991999999998,
+          140.089964
+        ]
+      ],
+      "box": [
+        402,
+        213,
+        235.10015999999996,
+        140.36985400000003
+      ],
+      "detection": "car",
+      "panoptic": "truck",
+      "segment_id": 12904634
+    },
+    {
+      "target": "img_0082",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          361.71008,
+          80.71968000000001,
+          139.13984,
+          80.90016
+        ],
+        [
+          229.03008,
+          94.11,
+          127.28,
+          89.53008
+        ]
+      ],
+      "box": [
+        229.03008,
+        80.71968000000001,
+        271.81984,
+        102.9204
+      ],
+      "detection": "umbrella",
+      "panoptic": "umbrella",
+      "segment_id": 15203384
+    },
+    {
+      "target": "img_0083",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          293.34016,
+          308.94,
+          50.4,
+          75.33984
+        ],
+        [
+          297.62016,
+          243.79992,
+          39.23008,
+          70.11984
+        ]
+      ],
+      "box": [
+        291,
+        243.79992,
+        52.74016,
+        140.47992
+      ],
+      "detection": "horse",
+      "panoptic": "horse",
+      "segment_id": 832345
+    },
+    {
+      "target": "img_0084",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          92.76,
+          44.219934999999985,
+          406.32,
+          152.95009000000002
+        ]
+      ],
+      "box": [
+        92.76,
+        44,
+        406.32,
+        153.170025
+      ],
+      "detection": "fork",
+      "panoptic": "knife",
+      "segment_id": 8714551
+    },
+    {
+      "target": "img_0095",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          39.26000000000002,
+          56.010044,
+          296.82,
+          222.140054
+        ]
+      ],
+      "box": [
+        39,
+        56,
+        297.08000000000004,
+        222.150098
+      ],
+      "detection": "truck",
+      "panoptic": "car",
+      "segment_id": 3080200
+    },
+    {
+      "target": "img_0148",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          303.2,
+          154.72985500000001,
+          95.95008,
+          140.09016
+        ],
+        [
+          216.56000000000003,
+          155.860124,
+          82.11968,
+          124.61995
+        ]
+      ],
+      "box": [
+        216.56000000000003,
+        154.72985500000001,
+        182.59007999999997,
+        140.09016
+      ],
+      "detection": "giraffe",
+      "panoptic": "giraffe",
+      "segment_id": 7430568
+    },
+    {
+      "target": "img_0157",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          247.269783,
+          411.32032000000004,
+          57.910014000000004,
+          28.14976
+        ]
+      ],
+      "box": [
+        247,
+        411.32032000000004,
+        58.17979700000001,
+        28.149760000000015
+      ],
+      "detection": "truck",
+      "panoptic": "car",
+      "segment_id": 6151635
+    },
+    {
+      "target": "img_0162",
+      "hint": "bbox_drift",
+      "reason": "Kho\u1ea3ng 22% \u0111i\u1ec3m mask l\u1ea5y m\u1eabu n\u1eb1m ngo\u00e0i box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          111.02111999999998,
+          392.179732,
+          72.36288,
+          74.856712
+        ]
+      ],
+      "box": [
+        107,
+        376,
+        93,
+        96
+      ],
+      "detection": "parking meter",
+      "panoptic": "parking meter",
+      "segment_id": 9569170
+    },
+    {
+      "target": "img_0193",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          325.33984,
+          233.669946,
+          31.020159999999997,
+          58.379892
+        ],
+        [
+          370.12,
+          230.710098,
+          29.580160000000003,
+          62.500164000000005
+        ]
+      ],
+      "box": [
+        325,
+        230.710098,
+        75,
+        62.50016400000001
+      ],
+      "detection": "horse",
+      "panoptic": "horse",
+      "segment_id": 5878183
+    },
+    {
+      "target": "img_0219",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          -0.00032000000000032003,
+          229.47981,
+          133.80032,
+          139.019988
+        ]
+      ],
+      "box": [
+        -0.00032000000000032003,
+        229,
+        134.00032,
+        139.499798
+      ],
+      "detection": "microwave",
+      "panoptic": "spoon",
+      "segment_id": 2249038
+    },
+    {
+      "target": "img_0247",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          383.28000000000003,
+          2.910239999999993,
+          249.16992,
+          189.84
+        ]
+      ],
+      "box": [
+        383,
+        2.910239999999993,
+        249.44992000000002,
+        190.08976
+      ],
+      "detection": "sandwich",
+      "panoptic": "stop sign",
+      "segment_id": 7754303
+    }
+  ]
+}
