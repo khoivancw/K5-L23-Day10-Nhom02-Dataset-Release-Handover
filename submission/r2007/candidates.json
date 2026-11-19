@@ -1,0 +1,241 @@
+{
+  "candidates": [
+    {
+      "target": "000000001818",
+      "hint": "bbox_drift",
+      "reason": "Kho\u1ea3ng 51% \u0111i\u1ec3m mask l\u1ea5y m\u1eabu n\u1eb1m ngo\u00e0i box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          178.04032000000004,
+          1.4398999999999773,
+          461.95968,
+          423.56010000000003
+        ]
+      ],
+      "box": [
+        0,
+        1,
+        640.0,
+        424
+      ],
+      "detection": "zebra",
+      "panoptic": "zebra",
+      "segment_id": 8092282
+    },
+    {
+      "target": "000000012748",
+      "hint": "missing_box",
+      "reason": "Mask c\u1ee7a v\u1eadt kh\u00e1 l\u1edbn nh\u01b0ng kh\u00f4ng th\u1ea5y box t\u01b0\u01a1ng \u1ee9ng.",
+      "boxes": [],
+      "box": [
+        221,
+        139,
+        259,
+        493
+      ],
+      "detection": "\u2014",
+      "panoptic": "person",
+      "segment_id": 4079972
+    },
+    {
+      "target": "000000013177",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          269.97024,
+          2.9800330000000055,
+          111.12,
+          195.60016
+        ]
+      ],
+      "box": [
+        269.97024,
+        2.9800330000000055,
+        111.12,
+        195.60016
+      ],
+      "detection": "bicycle",
+      "panoptic": "motorcycle",
+      "segment_id": 6250585
+    },
+    {
+      "target": "000000013923",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          213.50016,
+          232.3701975,
+          122.38976,
+          138.029885
+        ],
+        [
+          240.48000000000002,
+          369.4098695,
+          98.81984,
+          57.58991699999999
+        ]
+      ],
+      "box": [
+        213.50016,
+        232.3701975,
+        125.79968000000002,
+        194.62958900000004
+      ],
+      "detection": "chair",
+      "panoptic": "chair",
+      "segment_id": 4080824
+    },
+    {
+      "target": "000000017379",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          145.25989800000002,
+          214.29023999999998,
+          165.38991199999998,
+          107.87008
+        ]
+      ],
+      "box": [
+        145,
+        214,
+        166,
+        108.16031999999996
+      ],
+      "detection": "tv",
+      "panoptic": "laptop",
+      "segment_id": 12288068
+    },
+    {
+      "target": "000000017959",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          271.26976,
+          176.830094,
+          148.70015999999998,
+          90.419812
+        ],
+        [
+          191.33984,
+          272.41020100000003,
+          132.94016,
+          125.88984799999999
+        ]
+      ],
+      "box": [
+        191.33984,
+        176.830094,
+        228.63008,
+        221.469955
+      ],
+      "detection": "kite",
+      "panoptic": "kite",
+      "segment_id": 2365329
+    },
+    {
+      "target": "000000018380",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          227.84032,
+          121.58018700000001,
+          50.73984,
+          93.80988599999999
+        ],
+        [
+          226.29024,
+          31.439864999999998,
+          54.57984,
+          86.670126
+        ]
+      ],
+      "box": [
+        221,
+        31.439864999999998,
+        59.87008000000003,
+        183.950208
+      ],
+      "detection": "person",
+      "panoptic": "person",
+      "segment_id": 2436446
+    },
+    {
+      "target": "000000018491",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          0.0,
+          141.06991150000002,
+          223.93984,
+          11.889815
+        ]
+      ],
+      "box": [
+        0,
+        141,
+        224,
+        12
+      ],
+      "detection": "couch",
+      "panoptic": "bench",
+      "segment_id": 10793650
+    },
+    {
+      "target": "000000019109",
+      "hint": "instance_merge",
+      "reason": "M\u1ed9t v\u00f9ng mask tr\u1ea3i tr\u00ean hai box c\u00f9ng l\u1edbp.",
+      "boxes": [
+        [
+          378.59008000000006,
+          249.099852,
+          82.94015999999999,
+          95.360112
+        ],
+        [
+          457.22015999999996,
+          251.67983600000002,
+          70.06016,
+          85.219936
+        ]
+      ],
+      "box": [
+        378.59008000000006,
+        249.099852,
+        148.6902399999999,
+        95.36011200000002
+      ],
+      "detection": "motorcycle",
+      "panoptic": "motorcycle",
+      "segment_id": 5523777
+    },
+    {
+      "target": "000000025386",
+      "hint": "class_disagreement",
+      "reason": "Box v\u00e0 mask \u1edf c\u00f9ng v\u1ecb tr\u00ed nh\u01b0ng kh\u00e1c t\u00ean l\u1edbp.",
+      "boxes": [
+        [
+          353.000046,
+          259.16032,
+          73.999954,
+          380.83968
+        ]
+      ],
+      "box": [
+        353,
+        259.16032,
+        74,
+        380.83968
+      ],
+      "detection": "couch",
+      "panoptic": "chair",
+      "segment_id": 5335143
+    }
+  ]
+}

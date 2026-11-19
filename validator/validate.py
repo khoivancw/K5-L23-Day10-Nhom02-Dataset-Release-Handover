@@ -86,6 +86,55 @@ def region_hint(segment, name, points, detections):
     return None
 
 
+def suggest(root, manifest):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from pngutil import read_rgb
+    pan = read_json(inside(root, "panoptic.json"))
+    images = {i["id"]: i for i in pan["images"]}
+    categories = {c["id"]: c for c in pan["categories"]}
+    names = dict(line.split(maxsplit=1) for line in inside(root, "classes.txt").read_text().splitlines() if line.strip())
+    annotations = {a["file_name"]: a for a in pan["annotations"]}
+    queue = []
+    for target, item in manifest.items():
+        if not inside(root, item["image"]).is_file():
+            continue
+        ann = annotations.get(Path(item["mask"]).name)
+        if not ann:
+            continue
+        im = images[ann["image_id"]]
+        segments = [s for s in ann["segments_info"] if not s.get("iscrowd")
+                    and categories.get(s["category_id"], {}).get("isthing")]
+        detections = []
+        for line in inside(root, item["label"]).read_text().splitlines():
+            fields = line.split()
+            if len(fields) != 5 or fields[0] not in names:
+                continue
+            cx, cy, w, h = map(float, fields[1:])
+            if w > 0 and h > 0:
+                detections.append((names[fields[0]], [(cx-w/2)*im["width"], (cy-h/2)*im["height"],
+                                                     w*im["width"], h*im["height"]]))
+        width, height, rgb = read_rgb(inside(root, item["mask"]))
+        points = mask_samples(width, height, rgb, {s["id"] for s in segments})
+        best_score = 0
+        best = None
+        for seg in segments:
+            category = categories[seg["category_id"]]["name"]
+            hint = region_hint(seg, category, points[seg["id"]], detections)
+            if hint and hint[0] > best_score:
+                best_score, kind, reason, boxes, detection = hint
+                regions = [seg["bbox"], *boxes]
+                left = min(r[0] for r in regions)
+                top = min(r[1] for r in regions)
+                right = max(r[0]+r[2] for r in regions)
+                bottom = max(r[1]+r[3] for r in regions)
+                best = dict(target=target, hint=kind, reason=reason, boxes=boxes,
+                            box=[left, top, right-left, bottom-top], detection=detection,
+                            panoptic=category, segment_id=seg["id"])
+        if best:
+            queue.append(best)
+    return queue
+
+
 def write_json(path, obj):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(obj, indent=2) + "\n", encoding="utf-8")
@@ -95,17 +144,22 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("delivery", type=Path)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--candidates", type=Path)
     args = parser.parse_args()
     root = args.delivery.resolve()
-    outputs = [args.out.resolve()]
+    outputs = [p.resolve() for p in (args.out, args.candidates) if p]
     if len(set(outputs)) != len(outputs) or any(p.is_relative_to(root) for p in outputs):
         parser.error("Use distinct output files outside delivery")
     manifest = read_json(inside(root, "manifest.json"))["items"]
     errors = []
     for target, item in manifest.items():
         errors.extend(file_errors(root, target, item))
+    queue = suggest(root, manifest) if args.candidates else []
     write_json(args.out, {"errors": errors})
     print(f"{len(manifest)} images; {len(errors)} missing_image/wrong_hash")
+    if args.candidates:
+        write_json(args.candidates, {"candidates": queue})
+        print(f"{len(queue)} images for visual review")
 
 
 if __name__ == "__main__":
