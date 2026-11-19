@@ -1,5 +1,6 @@
 """Hai luật kiểm file và hàng đợi gợi ý bất đồng lớp. Chỉ dùng thư viện chuẩn."""
 import argparse
+import csv
 import hashlib
 import json
 import sys
@@ -62,6 +63,21 @@ def label_errors(path, classes, width, height):
                 break
         groups[label].append((cx, cy, w, h))
     return issues
+
+
+
+def metadata_errors(root):
+    with inside(root, "jobs.csv").open(encoding="utf-8-sig", newline="") as stream:
+        guidelines = {row["job_id"]: row["guideline"] for row in csv.DictReader(stream)}
+    errors = []
+    splits = defaultdict(set)
+    for row in read_json(inside(root, "metadata.json"))["items"]:
+        splits[row["scene_id"]].add(row["split"])
+        if row["guideline_version"] != guidelines[row["job_id"]]:
+            errors.append({"type": "guideline_mismatch", "target": row["image"]})
+    errors.extend({"type": "scene_leak", "target": scene}
+                  for scene, values in splits.items() if len(values) > 1)
+    return errors
 
 
 
