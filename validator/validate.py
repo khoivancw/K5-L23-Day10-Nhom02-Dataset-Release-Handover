@@ -40,6 +40,31 @@ def overlap(a, b):
     return area / union if union > 0 else 0
 
 
+def label_errors(path, classes, width, height):
+    issues = set()
+    groups = defaultdict(list)
+    # YOLO stores six decimal places. Allow rounding at the image border.
+    epsilon = 0.000002
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        label, *coordinates = line.split()
+        if label not in classes:
+            issues.add("invalid_class")
+        cx, cy, w, h = map(float, coordinates)
+        if not (w > 0 and h > 0 and cx-w/2 >= -epsilon and cy-h/2 >= -epsilon
+                and cx+w/2 <= 1+epsilon and cy+h/2 <= 1+epsilon):
+            issues.add("bbox_out_of_bounds")
+        for x, y, other_w, other_h in groups[label]:
+            if (abs(w-other_w) <= epsilon and abs(h-other_h) <= epsilon
+                    and abs(cx-x)*width <= 2.001 and abs(cy-y)*height <= 2.001):
+                issues.add("duplicate_box")
+                break
+        groups[label].append((cx, cy, w, h))
+    return issues
+
+
+
 def mask_samples(width, height, rgb, segment_ids):
     points = defaultdict(list)
     for y in range(1, height, 3):
