@@ -1,0 +1,11 @@
+image,type,verdict,note
+000000001818,missing_box,confirmed,"Khởi: “Có hai con ngựa vằn. Khung cam bao con bên phải đang cúi đầu, còn con bên trái thấy rõ thân và chân nhưng thiếu khung riêng."
+000000012748,missing_box,confirmed,Khởi: Người áo đỏ đang bế em bé có viền mask xanh nhưng thiếu khung cam bao quanh
+000000013177,category_swap,confirmed,"Vinh: Chiếc xe phía sau người thợ là xe đạp. Khung cam ghi đúng bicycle, còn mask của cùng chiếc xe lại ghi motorcycle"
+000000013923,instance_merge,rejected,Vinh: Viền xanh bám theo tựa lưng và mặt ngồi của ghế đỏ. Ghế gỗ phía sau có khung cam chồng lên vùng này nhưng phần gỗ nằm ngoài viền xanh
+000000017379,category_swap,confirmed,"Nam: TV treo trên tường đang chiếu trận đấu. Box ghi tv, nhưng mask của màn hình lại mang nhãn laptop"
+000000017959,instance_merge,rejected,Nam: Hai khung cam bao hai diều hình cá. Mask xanh chỉ bám theo dải diều đỏ nằm chéo giữa hai khung
+000000018380,instance_merge,rejected,"Nam: Viền xanh bám đầu và thân người áo tím, dừng ở vai cô gái phía trước. Hai người che nhau nhưng mask vẫn tách rõ"
+000000018491,class_swap,confirmed,"Long: Sau hàng rào bên trái sân bóng là dãy ghế băng cho khán giả. Mask ghi bench, còn box ghi nhầm couch"
+000000019109,instance_merge,rejected,Dũng: Viền xanh bám theo phần thân và bánh trước của chiếc xe ở giữa. Bánh trước của xe kế bên nằm ngoài vùng mask.
+000000025386,class_swap,confirmed,"Mạnh: Ở mép phải là lưng ghế hành khách có đệm sọc xanh. Mask ghi chair, còn box ghi couch"

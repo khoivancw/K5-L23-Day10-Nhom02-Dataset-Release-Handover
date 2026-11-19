@@ -1,0 +1,8 @@
+image,type,annotator,reviewer,action
+000000000776,duplicate_box,A02,Q03,relabel and review
+000000001818,missing_box,A02,Q03,relabel and review
+000000004134,bbox_out_of_bounds,A01,Q01,relabel and review
+000000012748,missing_box,A02,Q03,relabel and review
+000000018491,class_swap,A04,Q01,relabel and review
+000000020571,duplicate_box,A04,Q01,relabel and review
+000000025386,class_swap,A05,Q03,relabel and review
